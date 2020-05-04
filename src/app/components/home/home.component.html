@@ -2,6 +2,44 @@
     <h1 class="display-4">Corona Covid19-Tracker</h1>
     
     <hr class="my-4">
+    <div class="ui form">
+        <div class="inline fields">
+          <label for="fruit">Select Case Type : </label>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input type="radio" value="c" id='c' #c (click)='updateChart(c)' name="casetype" checked="" tabindex="0" class="hidden">
+              <label for='c'>Confirmed</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input type="radio" value="d" id='d' #d (click)='updateChart(d)' name="casetype" tabindex="0" class="hidden">
+              <label for='d'>Deaths</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input type="radio" value="r" id ='r' #r (click)='updateChart(r)' name="casetype" tabindex="0" class="hidden">
+              <label for='r'>Recovered</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input type="radio" value="a"id='a' #a (click)='updateChart(a)' name="casetype" tabindex="0" class="hidden">
+              <label for ='a'>Active</label>
+            </div>
+          </div>
+        </div>
     <app-dashboard-card [totalConfirmed]='totalConfirmed'[totalActive]='totalActive'
     [totalRecovered]='totalRecovered'[totalDeaths]='totalDeaths'></app-dashboard-card>
+<div class ="row">
+    <div class ="col">
+        <google-chart [data]="pieChart"></google-chart>
+    </div>
+    <div class ="col">
+        <google-chart [data]="columnChart"></google-chart>
+    </div>
 </div>
+
+</div>
+
