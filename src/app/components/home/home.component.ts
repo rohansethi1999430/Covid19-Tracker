@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataServiceService } from 'src/app/services/data-service.service';
 import { GlobalDataSummary } from 'src/app/models/global-data';
-import { GoogleChartInterface } from 'ng2-google-charts';
+import { GoogleChartsModule } from 'angular-google-charts';
 
 @Component({
   selector: 'app-home',
@@ -13,18 +13,26 @@ export class HomeComponent implements OnInit {
   totalActive=0;
   totalDeaths=0;
   totalRecovered=0;
+  datatable=[];
   globalData:GlobalDataSummary[];
-  pieChart : GoogleChartInterface={
-    chartType:'PieChart'
+  chart={
+    PieChart:"PieChart",
+    ColumnChart:'ColumnChart',
+    height : 500,
+  
+  options: {
+    
+    animation:{
+      duration:1000,
+      erasing:'out',
+    },
   }
-  columnChart : GoogleChartInterface={
-    chartType:'ColumnChart'
-  }
+}
   constructor(private dataService:DataServiceService) { }
 
   initChart(caseType: string){
-    let datatable=[];
-    datatable.push(["Country","Cases"])
+    this.datatable=[];
+    //this.datatable.push(["Country","Cases"])
     this.globalData.forEach(cs=>{
       let value: number;
       if(caseType=='c'){
@@ -34,7 +42,7 @@ export class HomeComponent implements OnInit {
 
       if(caseType=='r'){
         if(cs.recovered > 20000){
-        
+        value=cs.recovered
         }}
 
         if(caseType=='a'){
@@ -48,28 +56,14 @@ export class HomeComponent implements OnInit {
             
 
             }}
-            datatable.push([
+            this.datatable.push([
               cs.country,value
             ])
     })
-    console.log(datatable);
-    this.pieChart = {
-      chartType: 'PieChart',
-      dataTable: datatable,
-      //firstRowIsData: true,
-      options: {
-        height : 500
-      },
-    };
-
-    this.columnChart = {
-      chartType: 'ColumnChart',
-      dataTable: datatable,
-      //firstRowIsData: true,
-      options: {
-        height : 500
-      },
-    };
+    console.log(this.datatable);
+    
+      
+    
   }
 
   ngOnInit():void {
