@@ -7,7 +7,16 @@ import { GlobalDataSummary } from '../models/global-data';
   providedIn: 'root'
 })
 export class DataServiceService {
+  private  dateWiseDataUrl='https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv'
   private globalDataUrl= 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/04-26-2020.csv'
+
+getDateWiseData(){
+  return this.http.get(this.dateWiseDataUrl,{responseType:'text'})
+  .pipe(map(result=>{
+    let rows=result.split('\n');
+    console.log(rows);
+  }))
+}
 
   constructor(private http: HttpClient) { }
   getGlobalData(){

@@ -17,6 +17,11 @@ export class CountriesComponent implements OnInit {
   constructor(private service:DataServiceService) { }
 
   ngOnInit() {
+    this.service.getDateWiseData().subscribe(
+      (result)=>{
+        console.log(result);
+      }
+    )
     this.service.getGlobalData().subscribe(result=>{
       this.data=result;
       this.data.forEach(cs=>{
